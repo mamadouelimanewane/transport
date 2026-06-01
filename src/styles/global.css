@@ -1,143 +1,319 @@
 /* ═══════════════════════════════════════════════════════
-   DakarMobile 2.0 — Design System
-   Police : Inter (corps) + Space Grotesk (titres)
+   SenBus v3 — Mobile-First Responsive Design System
    ═══════════════════════════════════════════════════════ */
 
 :root {
-  /* Brand */
-  --brand-50:  #eff6ff;
-  --brand-100: #dbeafe;
-  --brand-200: #bfdbfe;
-  --brand-400: #60a5fa;
-  --brand-500: #3b82f6;
-  --brand-600: #1a56db;
-  --brand-700: #1d4ed8;
-  --brand-800: #1e40af;
-  --brand-900: #1e3a8a;
+  --brand-50:#eff6ff;--brand-100:#dbeafe;--brand-200:#bfdbfe;
+  --brand-400:#60a5fa;--brand-500:#3b82f6;--brand-600:#1a56db;
+  --brand-700:#1d4ed8;--brand-800:#1e40af;--brand-900:#1e3a8a;
 
-  /* Opérateurs */
-  --ddd-color:  #1a56db;
-  --aftu-color: #d97706;
-  --brt-color:  #7c3aed;
-  --ter-color:  #059669;
+  --ddd-color:#1a56db;--aftu-color:#e11d48;--brt-color:#7c3aed;--ter-color:#059669;
 
-  /* Surfaces */
-  --surface-0:   #ffffff;
-  --surface-1:   #f8faff;
-  --surface-2:   #f0f4ff;
-  --surface-3:   #e4ecff;
-  --surface-border: rgba(26, 86, 219, 0.12);
+  --surface-0:#ffffff;--surface-1:#f8faff;--surface-2:#f0f4ff;
+  --surface-3:#e4ecff;--surface-border:rgba(26,86,219,0.12);
+  --text-primary:#0f172a;--text-secondary:#475569;--text-muted:#94a3b8;
+  --text-on-brand:#ffffff;
 
-  /* Texte */
-  --text-primary:   #0f172a;
-  --text-secondary: #475569;
-  --text-muted:     #94a3b8;
-  --text-on-brand:  #ffffff;
+  --radius-xs:6px;--radius-sm:10px;--radius-md:14px;
+  --radius-lg:20px;--radius-xl:28px;--radius-full:9999px;
 
-  /* Layout */
-  --sidebar-w: 360px;
-  --header-h:  56px;
-  --pill-h:    40px;
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --shadow-sm:0 1px 3px rgba(15,23,42,.06);
+  --shadow-md:0 4px 16px rgba(15,23,42,.08);
+  --shadow-lg:0 12px 40px rgba(15,23,42,.14);
+  --shadow-brand:0 4px 20px rgba(26,86,219,.35);
 
-  /* Ombres */
-  --shadow-sm: 0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
-  --shadow-md: 0 4px 16px rgba(15,23,42,.08), 0 2px 6px rgba(15,23,42,.04);
-  --shadow-lg: 0 12px 40px rgba(15,23,42,.14), 0 4px 12px rgba(15,23,42,.06);
-  --shadow-brand: 0 4px 20px rgba(26,86,219,.35);
+  --ease:cubic-bezier(.4,0,.2,1);
+  --t-fast:120ms var(--ease);--t-base:200ms var(--ease);
 
-  /* Transitions */
-  --ease: cubic-bezier(.4,0,.2,1);
-  --t-fast: 120ms var(--ease);
-  --t-base: 200ms var(--ease);
-  --t-slow: 350ms var(--ease);
+  /* Mobile layout */
+  --header-h:52px;
+  --bottom-nav-h:64px;
+  --sidebar-w:0px;
+  --safe-bottom:env(safe-area-inset-bottom, 0px);
 }
 
-/* ── Dark mode ───────────────────────────────────── */
+/* ── Dark mode ───────────────────────────────── */
 [data-theme="dark"] {
-  --surface-0:      #0f1117;
-  --surface-1:      #161b27;
-  --surface-2:      #1e2435;
-  --surface-3:      #252d42;
-  --surface-border: rgba(96,165,250,.15);
-  --text-primary:   #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted:     #475569;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.4);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,.6);
+  --surface-0:#0f1117;--surface-1:#161b27;--surface-2:#1e2435;
+  --surface-3:#252d42;--surface-border:rgba(96,165,250,.15);
+  --text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#475569;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.3);
+  --shadow-md:0 4px 16px rgba(0,0,0,.4);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.6);
 }
 
-/* ── Reset ───────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Reset ───────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%;overflow:hidden}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--surface-0);color:var(--text-primary);
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior:none;
+  touch-action:manipulation;
+}
+button{font-family:inherit;cursor:pointer;border:none;outline:none;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:2px solid var(--brand-500);outline-offset:2px}
+input{font-family:inherit;outline:none;-webkit-appearance:none}
 
-html, body, #root {
-  height: 100%;
-  overflow: hidden;
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:2px}
+
+/* ── Animations ──────────────────────────── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.anim-fade{animation:fadeIn .25s var(--ease) both}
+.anim-up{animation:slideUp .3s var(--ease) both}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT — Mobile First
+   ═══════════════════════════════════════════════ */
+
+/* ── App shell ───────────────────────────────── */
+.app-shell{
+  display:flex;flex-direction:column;
+  height:100vh;height:100dvh;
+  overflow:hidden;background:var(--surface-0);
+  transition:background var(--t-base);
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--surface-0);
-  color: var(--text-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ── Header compact mobile ───────────────────── */
+.app-header{
+  position:relative;z-index:200;
+  background:var(--brand-700);
+  flex-shrink:0;
+  padding:0 12px;
+  height:var(--header-h);
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 2px 12px rgba(26,86,219,.35);
+}
+.header-logo{display:flex;align-items:center;gap:8px;flex:1}
+.header-logo-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+.header-logo h1{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#fff;line-height:1}
+.header-logo span{font-size:10px;color:rgba(255,255,255,.6);display:block;margin-top:1px}
+.header-actions{display:flex;gap:6px}
+.header-btn{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:white;
 }
 
-/* ── Scrollbar ───────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 2px; }
-
-/* ── Utilitaires ─────────────────────────────────── */
-.font-display { font-family: 'Space Grotesk', sans-serif; }
-
-button { font-family: inherit; cursor: pointer; border: none; outline: none; }
-button:focus-visible { outline: 2px solid var(--brand-500); outline-offset: 2px; }
-input { font-family: inherit; outline: none; }
-
-/* ── Leaflet overrides ───────────────────────────── */
-.leaflet-container { font-family: 'Inter', sans-serif; }
-.leaflet-popup-content-wrapper {
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--shadow-lg) !important;
-  border: 1px solid var(--surface-border) !important;
-  padding: 0 !important;
-  overflow: hidden;
+/* ── Operator filter bar ─────────────────────── */
+.op-filter{
+  display:flex;gap:5px;padding:8px 10px;
+  background:var(--surface-0);
+  border-bottom:1px solid var(--surface-border);
+  overflow-x:auto;flex-shrink:0;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
 }
-.leaflet-popup-content { margin: 0 !important; width: auto !important; }
-.leaflet-popup-tip-container { display: none; }
-.leaflet-control-zoom {
-  border: none !important;
-  box-shadow: var(--shadow-md) !important;
-  border-radius: var(--radius-sm) !important;
-  overflow: hidden;
+.op-filter::-webkit-scrollbar{display:none}
+.op-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 11px;border-radius:20px;
+  font-size:12px;font-weight:600;cursor:pointer;
+  border:1.5px solid transparent;white-space:nowrap;
+  background:var(--surface-1);color:var(--text-secondary);
+  border-color:var(--surface-border);
+  transition:all var(--t-fast);
+  min-height:32px;
 }
-.leaflet-control-zoom a {
-  color: var(--text-primary) !important;
-  background: var(--surface-0) !important;
-  border-color: var(--surface-border) !important;
-  font-size: 18px !important;
-  line-height: 30px !important;
+.op-pill.active{color:white;border-color:transparent;box-shadow:var(--shadow-brand)}
+.op-pill-icon{font-size:13px}
+
+/* ── Main body ───────────────────────────────── */
+.app-body{
+  display:flex;flex:1;overflow:hidden;
+  flex-direction:column-reverse;
 }
-.leaflet-control-zoom a:hover { background: var(--surface-1) !important; }
-.leaflet-attribution-flag { display: none !important; }
-.leaflet-control-attribution {
-  font-size: 10px !important;
-  background: rgba(255,255,255,.7) !important;
-  backdrop-filter: blur(8px);
-  border-radius: 6px !important;
+.sidebar{
+  width:100%;height:50dvh;
+  border-top:1px solid var(--surface-border);
+  background:var(--surface-0);
+  flex-shrink:0;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:height .3s var(--ease);
+  position:relative;z-index:10;
+}
+.sidebar.collapsed{height:0;border-top:none}
+.map-area{flex:1;position:relative;overflow:hidden}
+
+/* ── Sidebar drag handle ─────────────────────── */
+.sidebar-handle{
+  width:100%;height:20px;display:flex;
+  align-items:center;justify-content:center;
+  cursor:grab;flex-shrink:0;
+  background:var(--surface-0);
+}
+.sidebar-handle-bar{
+  width:36px;height:4px;border-radius:2px;
+  background:var(--surface-3);
 }
 
-/* ── Animations ──────────────────────────────────── */
-@keyframes fadeIn   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-@keyframes slideIn  { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
-@keyframes pulse    { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-@keyframes spin     { to { transform: rotate(360deg); } }
+/* ── Bottom Navigation (mobile) ──────────────── */
+.bottom-nav{
+  display:flex;
+  background:var(--surface-0);
+  border-top:1px solid var(--surface-border);
+  flex-shrink:0;z-index:200;
+  padding-bottom:var(--safe-bottom);
+  box-shadow:0 -2px 12px rgba(0,0,0,.06);
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:6px 0 4px;gap:2px;
+  background:none;color:var(--text-muted);
+  font-size:10px;font-weight:500;
+  position:relative;transition:color var(--t-fast);
+  min-height:var(--bottom-nav-h);
+}
+.nav-item.active{color:var(--brand-600)}
+.nav-item.active::before{
+  content:'';position:absolute;top:0;
+  width:24px;height:3px;border-radius:0 0 3px 3px;
+  background:var(--brand-600);
+}
+.nav-item-icon{font-size:20px;line-height:1}
+.nav-item-label{font-size:10px;line-height:1}
 
-.anim-fade  { animation: fadeIn .25s var(--ease) both; }
-.anim-slide { animation: slideIn .25s var(--ease) both; }
+/* ═══════════════════════════════════════════════
+   DESKTOP — min-width 768px
+   ═══════════════════════════════════════════════ */
+@media(min-width:768px){
+  :root{--header-h:56px;--sidebar-w:360px;--bottom-nav-h:0px}
+
+  .app-header{padding:0 16px;height:var(--header-h)}
+  .header-logo h1{font-size:18px}
+  .header-logo span{font-size:11px}
+
+  .app-body{flex-direction:row}
+  .sidebar{
+    width:var(--sidebar-w);min-width:300px;height:100%;
+    border-top:none;border-right:1px solid var(--surface-border);
+  }
+  .sidebar.collapsed{height:100%;width:0;min-width:0;overflow:hidden}
+  .sidebar-handle{display:none}
+  .bottom-nav{display:none}
+}
+
+/* ═══════════════════════════════════════════════
+   Leaflet overrides
+   ═══════════════════════════════════════════════ */
+.leaflet-container{font-family:'Inter',sans-serif}
+.leaflet-popup-content-wrapper{
+  border-radius:var(--radius-md)!important;
+  box-shadow:var(--shadow-lg)!important;
+  border:1px solid var(--surface-border)!important;
+  padding:0!important;overflow:hidden;
+}
+.leaflet-popup-content{margin:0!important;width:auto!important}
+.leaflet-popup-tip-container{display:none}
+.leaflet-control-zoom{
+  border:none!important;box-shadow:var(--shadow-md)!important;
+  border-radius:var(--radius-sm)!important;overflow:hidden;
+}
+.leaflet-control-zoom a{
+  color:var(--text-primary)!important;
+  background:var(--surface-0)!important;
+  border-color:var(--surface-border)!important;
+  width:36px!important;height:36px!important;
+  line-height:36px!important;font-size:18px!important;
+}
+.leaflet-attribution-flag{display:none!important}
+.leaflet-control-attribution{
+  font-size:9px!important;
+  background:rgba(255,255,255,.7)!important;
+  backdrop-filter:blur(8px);border-radius:4px!important;
+  padding:2px 6px!important;
+}
+
+/* ═══════════════════════════════════════════════
+   Touch-optimized shared components
+   ═══════════════════════════════════════════════ */
+
+/* Inputs */
+.input-field{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--surface-border);
+  border-radius:var(--radius-sm);
+  font-size:16px; /* Prevent iOS zoom */
+  background:var(--surface-1);color:var(--text-primary);
+  transition:border-color var(--t-fast);
+}
+.input-field:focus{border-color:var(--brand-500);background:var(--surface-0)}
+.input-field::placeholder{color:var(--text-muted);font-weight:400;font-size:14px}
+
+/* Cards */
+.card{
+  background:var(--surface-0);
+  border:1.5px solid var(--surface-border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;transition:all var(--t-fast);
+  box-shadow:var(--shadow-sm);
+}
+.card:active{transform:scale(.98)}
+
+/* Buttons */
+.btn-primary{
+  width:100%;padding:14px;
+  background:var(--brand-600);color:white;
+  border-radius:var(--radius-md);
+  font-size:15px;font-weight:600;
+  box-shadow:var(--shadow-brand);
+  transition:all var(--t-fast);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px; /* Touch target */
+}
+.btn-primary:active{transform:scale(.97)}
+.btn-primary:disabled{background:var(--surface-3);color:var(--text-muted);box-shadow:none}
+
+.btn-secondary{
+  padding:10px 16px;
+  background:var(--surface-1);color:var(--text-secondary);
+  border:1px solid var(--surface-border);
+  border-radius:var(--radius-md);
+  font-size:13px;font-weight:500;
+  min-height:44px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+/* Badges */
+.badge{
+  display:inline-flex;align-items:center;
+  padding:3px 9px;border-radius:var(--radius-full);
+  font-size:11px;font-weight:700;color:white;
+}
+.badge-sm{padding:2px 7px;font-size:10px}
+
+/* Section titles */
+.section-title{
+  font-size:11px;font-weight:700;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.6px;
+  margin-bottom:8px;padding:0 2px;
+}
+
+/* Empty states */
+.empty-state{
+  text-align:center;padding:3rem 1rem;color:var(--text-muted);
+}
+.empty-state-icon{font-size:40px;margin-bottom:8px}
+.empty-state-text{font-size:14px}
+
+/* ── Pull to refresh feel ────────────────────── */
+.scroll-container{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+}
